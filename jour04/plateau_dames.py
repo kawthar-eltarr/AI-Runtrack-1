@@ -14,23 +14,32 @@ def checkerboard(n):
     board[0, 4] = board[0, 4] + 1
     print(board)
     for i in range(1, n):
+        emplacements = []
         for j in range(0, n):
             print('Ligne {}, colonne {}'.format(i,j))
             if (j < n - 1) and (j !=0):
                 if (board[i-1, j-1]!=1) and (board[i-1, j]!=1) and (board[i-1, j+1]!=1):
-                    print("Emplacement de dame possible")
-                    print()
-                    #board[i, p] = board[i, p] + 1   
+                    #print("Emplacement de dame possible")
+                    emplacements.append(j)
+                    #print()
             elif (j==n-1):
                 if (board[i-1, j-1]!=1) and (board[i-1, j]!=1):
-                    print("Emplacement de dame possible")
-                    print()
+                    #print("Emplacement de dame possible")
+                    emplacements.append(j)
+                    #print()
             elif (j==0):
                 if (board[i-1, j]!=1) and (board[i-1, j+1]!=1):
-                    print("Emplacement de dame possible")
-                    print()
+                    #print("Emplacement de dame possible")
+                    emplacements.append(j)
+                    #print()
+        print(emplacements)
+        x = random.choice(emplacements)
+        print(x)
+        print()
+        board[i, x] = board[i, x] + 1
     return board
 
-checkerboard(8)
+board = checkerboard(8)
+
 
 
