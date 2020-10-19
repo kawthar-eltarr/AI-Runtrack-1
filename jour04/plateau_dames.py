@@ -12,12 +12,10 @@ def checkerboard(n):
     
     p = random.randint(0, n-1)
     board[0, p] = board[0, p] + 1
-    print(board)
     restricted_columns = [p]
     for i in range(1, n):
         emplacements = []
         for j in range(0, n):
-            print('Ligne {}, colonne {}'.format(i,j))
             if (j < n - 1) and (j !=0):
                 if (board[i-1, j-1]!=1) and (board[i-1, j]!=1) and (board[i-1, j+1]!=1) and (j not in restricted_columns):
                     emplacements.append(j)
@@ -27,15 +25,13 @@ def checkerboard(n):
             elif (j==0):
                 if (board[i-1, j]!=1) and (board[i-1, j+1]!=1) and (j not in restricted_columns):
                     emplacements.append(j)
-        if len(emplacements) < 1 :
-            print('Pas de choix possible ?')
         x = random.choice(emplacements)
         restricted_columns.append(x)
         board[i, x] = board[i, x] + 1
-        print(board)
         
     board = np.where(board==0, 'X', board)
     board = np.where(board=='1.0', 'O', board)
+    print(board)
     return board
 
 board = checkerboard(8)
