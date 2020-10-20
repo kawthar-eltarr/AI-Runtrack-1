@@ -1,2 +1,2 @@
 # AI-Runtrack-1
-First RunTrack of AIS
+This repository contains work from the first RunTrack of AIS.
