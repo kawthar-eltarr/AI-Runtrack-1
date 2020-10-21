@@ -33,6 +33,8 @@ class Auteur(Person):
 
 class Client(Person):
     def __init__(self, nom, prenom):
+        self.nom = nom
+        self.prenom = prenom
         self.collection = []
 
     def inventaire_client(self):
@@ -108,8 +110,14 @@ camus.ecrireUnLivre('L\'Étranger')
 camus.ecrireUnLivre('L\'Exil et le Royaume')
 camus.listerOeuvre()
  
-bibliotheque = Bibliotheque('Alcazar')
+alcazar = Bibliotheque('Alcazar')
 
-bibliotheque = Bibliotheque('Victoria')
+alcazar.acheterLivre(camus, 'La peste', 11)
 
+alcazar.acheterLivre(khadra, 'Ce que le jour doit à la nuit', 10)
 
+alcazar.acheterLivre(shakespeare, 'Romeo et Juliette', 4)
+
+ezio = Client('Ezio', 'Auditore')
+
+alcazar.louer(ezio, 'Dracula')
