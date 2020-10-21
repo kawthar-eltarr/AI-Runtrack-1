@@ -31,13 +31,15 @@ class Auteur(Person):
     def listerOeuvre(self):
         print(self.oeuvre)
 
-class bibliotheque:
+class bibliotheque(Auteur):
     def __init__(self):
         self.nom
-        self.catalogue = {'nom_livre' : [], 'quantite' : []}
+        self.catalogue = {'titre_livre' : [], 'quantite' : []}
         
-    def acheterLivre(self, auteur, name, quantite):
-        return 0
+    def acheterLivre(self, auteur, titre, quantite):
+        if titre in auteur.oeuvre:
+            self.catalogue['titre_livre'].append(titre)
+            self.catalogue['quantite'].append(quantite)
     
     def inventaire(self):
         print('Voici les livres en inventaire :')
