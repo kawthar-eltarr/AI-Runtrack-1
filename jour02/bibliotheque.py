@@ -31,6 +31,15 @@ class Auteur(Person):
     def listerOeuvre(self):
         print(self.oeuvre)
 
+class Client(Person):
+    def __init__(self, nom, prenom):
+        self.collection = []
+
+    def inventaire_client(self):
+        print('Voici les livres en inventaire du client :')
+        print(self.collection)
+
+
 class bibliotheque(Auteur):
     def __init__(self):
         self.nom
@@ -42,12 +51,16 @@ class bibliotheque(Auteur):
             self.catalogue['quantite'].append(quantite)
     
     def inventaire(self):
-        print('Voici les livres en inventaire :')
+        print('Voici les livres en inventaire de la biliothèque :')
         print(self.catalogue)
     
-    def louer(self):
-        return 0
+    def louer(self, client, titre):
+        if titre in self.catalogue['titre_livre']:
+            client.collection.append(titre)
     
-    def rendreLivres(self):
-        return 0
+    def rendreLivres(self, client):
+        for L in client.colletion:
+            print(client.colletion.count(L))
+
+
         
