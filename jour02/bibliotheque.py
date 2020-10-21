@@ -57,7 +57,10 @@ class Bibliotheque():
     
     def inventaire(self):
         print('Voici les livres en inventaire de la biliothèque :')
-        print(self.catalogue)
+        print('Titre','|','Quantité')
+        print('--------------------')
+        for i in range(0, len(self.catalogue['titre_livre'])):
+            print(self.catalogue['titre_livre'][i],'|', self.catalogue['quantite'][i])
     
     def louer(self, client, titre):
         if titre in self.catalogue['titre_livre']:
@@ -124,3 +127,7 @@ alcazar.acheterLivre(shakespeare, 'Romeo et Juliette', 4)
 ezio = Client('Ezio', 'Auditore')
 
 alcazar.louer(ezio, 'Dracula')
+
+alcazar.inventaire()
+
+ezio.inventaire_client()
