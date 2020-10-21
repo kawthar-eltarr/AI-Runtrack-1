@@ -40,15 +40,18 @@ class Client(Person):
         print(self.collection)
 
 
-class bibliotheque(Auteur):
-    def __init__(self):
-        self.nom
+class Bibliotheque():
+    def __init__(self, nom):
+        self.nom = nom
         self.catalogue = {'titre_livre' : [], 'quantite' : []}
         
     def acheterLivre(self, auteur, titre, quantite):
         if titre in auteur.oeuvre:
-            self.catalogue['titre_livre'].append(titre)
-            self.catalogue['quantite'].append(quantite)
+            if titre in self.catalogue['titre_livre']:
+                self.catalogue['quantite'][self.catalogue['titre_livre'].index(titre)] = self.catalogue['quantite'][self.catalogue['titre_livre'].index(titre)] + quantite
+            else:
+                self.catalogue['titre_livre'].append(titre)
+                self.catalogue['quantite'].append(quantite)
     
     def inventaire(self):
         print('Voici les livres en inventaire de la biliothèque :')
@@ -60,7 +63,53 @@ class bibliotheque(Auteur):
     
     def rendreLivres(self, client):
         for L in client.colletion:
-            print(client.colletion.count(L))
+            if L in self.catalogue['titre_livre']:
+                self.catalogue['quantite'][self.catalogue['titre_livre'].index(L)] = self.catalogue['quantite'][self.catalogue['titre_livre'].index(L)] + client.colletion.count(L)
+            else:
+                self.catalogue['titre_livre'].append(L)
+                self.catalogue['quantite'].append(client.colletion.count(L))
+        client.collection = []
 
 
-        
+gaarder = Auteur('Jostein', 'Gaarder')
+gaarder.ecrireUnLivre('Le Monde de Sophie')
+gaarder.ecrireUnLivre('Dans un miroir, obscur')
+gaarder.listerOeuvre()
+
+coelho = Auteur('Paulo', 'Coelho')
+coelho.ecrireUnLivre('L\'Alchimiste')
+coelho.ecrireUnLivre('La Cinquième Montagne')
+coelho.listerOeuvre()
+
+khadra = Auteur('Yasmina', 'Khadra')
+khadra.ecrireUnLivre('Ce que le jour doit à la nuit')
+khadra.ecrireUnLivre('Les anges meurent de nos blessures')
+khadra.ecrireUnLivre('Cousine K') 
+khadra.listerOeuvre()
+
+sapkowski = Auteur('Andrzej', 'Sapkowski')
+sapkowski.ecrireUnLivre('Le Dernier Vœu')
+sapkowski.ecrireUnLivre('L\'Épée de la providence')
+sapkowski.ecrireUnLivre('Quelque chose s\'achève, quelque chose commence ')
+sapkowski.listerOeuvre()
+
+shakespeare = Auteur('William', 'Shakespeare')
+shakespeare.ecrireUnLivre('Hamlet')
+shakespeare.ecrireUnLivre('Romeo et Juliette')
+shakespeare.ecrireUnLivre('Macbeth')
+
+stoker = Auteur('Bram', 'Stoker')
+stoker.ecrireUnLivre('Dracula')
+stoker.listerOeuvre()
+
+camus = Auteur('Albert', 'Camus')
+camus.ecrireUnLivre('La peste')
+camus.ecrireUnLivre('L\'Étranger')
+camus.ecrireUnLivre('L\'Exil et le Royaume')
+camus.listerOeuvre()
+ 
+bibliotheque = Bibliotheque('Alcazar')
+
+bibliotheque = Bibliotheque('Victoria')
+
+
