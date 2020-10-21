@@ -62,6 +62,7 @@ class Bibliotheque():
     def louer(self, client, titre):
         if titre in self.catalogue['titre_livre']:
             client.collection.append(titre)
+            self.catalogue['quantite'][self.catalogue['titre_livre'].index(titre)] = self.catalogue['quantite'][self.catalogue['titre_livre'].index(titre)] - 1
     
     def rendreLivres(self, client):
         for L in client.colletion:
@@ -115,6 +116,8 @@ alcazar = Bibliotheque('Alcazar')
 alcazar.acheterLivre(camus, 'La peste', 11)
 
 alcazar.acheterLivre(khadra, 'Ce que le jour doit à la nuit', 10)
+
+alcazar.acheterLivre(stoker, 'Dracula', 6)
 
 alcazar.acheterLivre(shakespeare, 'Romeo et Juliette', 4)
 
