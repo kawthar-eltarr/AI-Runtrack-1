@@ -161,7 +161,6 @@ class Game:
                 winner = 'X'
      
         return winner
-        
                 
     def __display_grid(self):
         """
@@ -270,6 +269,12 @@ class Game:
                 pygame.draw.line(self.window, (255,255,255), (self.width/3,(self.height/3)*2), ((self.width/3)*2, self.height),2)
                 pygame.draw.line(self.window, (255,255,255), ((self.width/3)*2,(self.height/3)*2), (self.width/3, self.height),2)
 
+    def display_winner(self, winner):
+        self.window.fill((255,255,255))
+        font = pygame.font.SysFont('Lato', 40, True)
+        message = font.render('The winner is player {} !'.format(winner), True, (0,0,0))
+        self.window.blit(message, [200, 30, 200, 50])
+
     def display_all(self):
         self.window = pygame.display.set_mode((self.width, self.height))
         counter = 0
@@ -291,9 +296,7 @@ class Game:
                             winner = self.get_winner()
                             if winner != None:
                                 print('The winner is player {} !'.format(winner))
-                                pygame.draw.line(self.window, (255,255,255), (self.width/3,(self.height/3)*2), ((self.width/3)*2, self.height),2)
-
-                                
+                                self.display_winner(winner)
             self.__display_grid()
             pygame.display.flip()
         pygame.quit()
