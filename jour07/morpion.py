@@ -49,7 +49,7 @@ class Game:
             box = 'nineth box'
         return box
     
-    def fill_grid(self, player='O'):
+    def fill_grid(self, player):
         box = self.__get_box()
         if box == 'first box':
             if self.grid[0][0] == None:
@@ -95,8 +95,15 @@ class Game:
             if self.grid[2][2] == None:
                 self.grid[2][2] = player
                 print(self.grid)
-                
-    def get_winner(grid):
+    
+    def player_switcher(self):
+        for i in range(9):
+            if i % 2 == 0:
+                self.fill_grid(player='O')
+            else:
+                self.fill_grid(player='X')
+    
+    def get_winner(self):
         """
         Get winner from grid
 
@@ -111,13 +118,14 @@ class Game:
             tic tac toe winner.
 
         """
+        winner = None
         o_moves = []
         x_moves = []
         for i in range(3):
             for j in range(3):
-                if grid[i][j] == 'O':
+                if self.grid[i][j] == 'O':
                     o_moves.append((i,j))
-                if grid[i][j] == 'X':
+                if self.grid[i][j] == 'X':
                     x_moves.append((i,j))
                     
         o_moves_lines = []
@@ -200,14 +208,16 @@ class Game:
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[1][1][0], self.box_centers[1][1][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255),(self.width/3, self.height/3),((self.width/3)*2, (self.height/3)*2),2)
+                pygame.draw.line(self.window, (255,255,255),((self.width/3)*2, self.height/3),(self.width/3, (self.height/3)*2),2)
                     
         if box == 'nineth box':
             print('Nineth box')
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[2][2][0], self.box_centers[2][2][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255), ((self.width/3)*2,(self.height/3)*2), (self.width,self.height), 2)
+                pygame.draw.line(self.window, (255,255,255), (self.width, (self.height/3)*2), ((self.width/3)*2, self.height), 2)
                 
         #boxes in line 1
         if box == 'second box':
@@ -215,14 +225,16 @@ class Game:
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[0][1][0], self.box_centers[0][1][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255), (self.width/3,0), ((self.width/3)*2, self.height/3), 2)
+                pygame.draw.line(self.window, (255,255,255), ((self.width/3)*2,0), (self.width/3, self.height/3), 2)
                     
         if box == 'third box':
             print('Third box')
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[0][2][0], self.box_centers[0][2][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255), ((self.width/3)*2,0), (self.width, self.height/3), 2)
+                pygame.draw.line(self.window, (255,255,255), (self.width,0), ((self.width/3)*2, self.height/3), 2)
         
         # boxes in line 2
         if box == 'forth box':
@@ -230,14 +242,16 @@ class Game:
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[1][0][0], self.box_centers[1][0][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255), (0,self.height/3), (self.width/3, (self.height/3)*2), 2)
+                pygame.draw.line(self.window, (255,255,255), (self.width/3,self.height/3), (0, (self.height/3)*2), 2)
         
         if box == 'sixth box':
             print('Sixth box')
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[1][2][0], self.box_centers[1][2][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255),((self.width/3)*2,self.height/3),(self.width, (self.height/3)*2),2)
+                pygame.draw.line(self.window, (255,255,255), (self.width,self.height/3), ((self.width/3)*2, (self.height/3)*2), 2)
         
         # boxes in line 3
         if box == 'seventh box':
@@ -245,17 +259,20 @@ class Game:
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[2][0][0], self.box_centers[2][0][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
+                pygame.draw.line(self.window, (255,255,255), (0,(self.height/3)*2), (self.width/3, self.height),2)
+                pygame.draw.line(self.window, (255,255,255), (self.width/3, (self.height/3)*2), (0, self.height), 2)
         
         if box == 'eighth box':
             print('Eighth box')
             if v == 'O':
                 pygame.draw.circle(self.window, (255, 255, 255), (self.box_centers[2][1][0], self.box_centers[2][1][1]), round(self.height/6)-10, 10)
             elif v == 'X':
-                print()
-    
-    def display_all(self, v):
+                pygame.draw.line(self.window, (255,255,255), (self.width/3,(self.height/3)*2), ((self.width/3)*2, self.height),2)
+                pygame.draw.line(self.window, (255,255,255), ((self.width/3)*2,(self.height/3)*2), (self.width/3, self.height),2)
+
+    def display_all(self):
         self.window = pygame.display.set_mode((self.width, self.height))
+        counter = 0
         run = True
         while run:
             for event in pygame.event.get():
@@ -263,14 +280,25 @@ class Game:
                     run = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pressed() == (1,0,0):
-                        self.fill_grid(player=v)
-                        self.__display_X_O(v)
+                        if counter % 2 == 0:
+                            player = 'O'
+                        else:
+                            player = 'X'
+                        self.fill_grid(player=player)
+                        self.__display_X_O(player)
+                        counter = counter + 1
+                        if counter >= 4:
+                            winner = self.get_winner()
+                            if winner != None:
+                                print('The winner is player {} !'.format(winner))
+                                pygame.draw.line(self.window, (255,255,255), (self.width/3,(self.height/3)*2), ((self.width/3)*2, self.height),2)
+
+                                
             self.__display_grid()
             pygame.display.flip()
         pygame.quit()
         
 
 g = Game(800, 600)
-g.display_all(v='X')
-
+g.display_all()
 
