@@ -12,6 +12,6 @@ file = open("domains.xml", "r")
 content = file.read()
 file.close()
 res = re.findall(r"\.[a-z]{2,4}[<|/|\n]", content)
-res.replace("<", "").strip()
 res = [r.replace("<", "").strip() for r in res]
 print('Nombre d\'extentions présentes dans le fichier : {}.'.format(len(res)))
+print(res)
